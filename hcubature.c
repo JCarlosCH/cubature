@@ -1056,7 +1056,7 @@ static int cubature(unsigned fdim, integrand_v f, void *fdata,
      return status;
 }
 
-int hcubature_v(unsigned fdim, integrand_v f, void *fdata, 
+int hcubature_v(unsigned fdim, unsigned fdimt, integrand_v f, integrand_v func_firts, integrand_v funct, void *fdata, 
                 unsigned dim, const double *xmin, const double *xmax, 
                 size_t maxEval, double reqAbsError, double reqRelError, 
                 error_norm norm,
@@ -1068,21 +1068,21 @@ int hcubature_v(unsigned fdim, integrand_v f, void *fdata,
 
 #include "vwrapper.h"
 
-int hcubature(unsigned fdim, integrand f, void *fdata, 
-	      unsigned dim, const double *xmin, const double *xmax, 
-	      size_t maxEval, double reqAbsError, double reqRelError, 
-	      error_norm norm,
-	      double *val, double *err)
-{
-     int ret;
-     fv_data d;
-
-     if (fdim == 0) return SUCCESS; /* nothing to do */     
-     
-     d.f = f; d.fdata = fdata;
-     ret = cubature(fdim, fv, &d, dim, xmin, xmax, 
-		    maxEval, reqAbsError, reqRelError, norm, val, err, 0);
-     return ret;
-}
+//int hcubature(unsigned fdim, integrand f, void *fdata, 
+//	      unsigned dim, const double *xmin, const double *xmax, 
+//	      size_t maxEval, double reqAbsError, double reqRelError, 
+//	      error_norm norm,
+//	      double *val, double *err)
+//{
+//     int ret;
+//     fv_data d;
+//
+//     if (fdim == 0) return SUCCESS; /* nothing to do */     
+//     
+//     d.f = f; d.fdata = fdata;
+//     ret = cubature(fdim, fv, &d, dim, xmin, xmax, 
+//		    maxEval, reqAbsError, reqRelError, norm, val, err, 0);
+//     return ret;
+//}
 
 /***************************************************************************/

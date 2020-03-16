@@ -87,7 +87,7 @@ int hcubature(unsigned fdim, integrand f, void *fdata,
 	      double *val, double *err);
 
 /* as hcubature, but vectorized integrand */
-int hcubature_v(unsigned fdim, integrand_v f, void *fdata,
+  int hcubature_v(unsigned fdim, integrand_v f, integrand_v func_first, integrand_v funct, void *fdata,
 		unsigned dim, const double *xmin, const double *xmax, 
 		size_t maxEval, double reqAbsError, double reqRelError, 
 		error_norm norm,
