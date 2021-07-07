@@ -258,7 +258,7 @@ static int alloc_rule_pts(rule *r, unsigned num_regions)
 			 repeatedly calling alloc_rule_pts with
 			 growing num_regions only needs
 			 a logarithmic number of allocations */
-    r->pts = (double *) malloc(sizeof(double) * 
+    r->pts = (double *) malloc(sizeof(double) *
 			       (num_regions
 				* r->num_points * (r->dim + r->fdim)));
     if (r->fdim + r->dim > 0 && !r->pts) return FAILURE;
@@ -273,8 +273,8 @@ static int alloc_rule_pts_mod(rule *r, unsigned num_regions)
   free(r->pts);
   r->pts = r->vals = NULL;
   r->num_regions = 0;
-  r->pts = (double *) malloc(sizeof(double) * 
-			     (num_regions 
+  r->pts = (double *) malloc(sizeof(double) *
+			     (num_regions
 			      * r->num_points * (r->dim + r->fdim ) ) );
   //printf( "alloc_rule_pts_mod: num_regions * r->num_point * r->dim = %u\n", num_regions * r->num_points * r->dim  );
   if (r->fdim + r->dim > 0 && !r->pts)
@@ -305,7 +305,7 @@ static rule *make_rule(size_t sz, /* >= sizeof(rule) */
 }
 
 /* note: all regions must have same fdim */
-static int eval_regions(unsigned nR, region *R, 
+static int eval_regions(unsigned nR, region *R,
 			integrand_v f, void *fdata, rule *r)
 {
   unsigned iR;
@@ -331,22 +331,22 @@ static unsigned ls0(unsigned n)
   return __builtin_ctz(~n); /* gcc builtin for version >= 3.4 */
 #else
   const unsigned bits[256] = {
-			      0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0, 4,
-			      0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0, 5,
-			      0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0, 4,
-			      0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0, 6,
-			      0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0, 4,
-			      0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0, 5,
-			      0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0, 4,
-			      0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0, 7,
-			      0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0, 4,
-			      0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0, 5,
-			      0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0, 4,
-			      0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0, 6,
-			      0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0, 4,
-			      0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0, 5,
-			      0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0, 4,
-			      0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0, 8,
+    0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0, 4,
+    0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0, 5,
+    0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0, 4,
+    0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0, 6,
+    0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0, 4,
+    0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0, 5,
+    0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0, 4,
+    0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0, 7,
+    0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0, 4,
+    0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0, 5,
+    0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0, 4,
+    0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0, 6,
+    0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0, 4,
+    0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0, 5,
+    0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0, 4,
+    0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0, 8,
   };
   unsigned bit = 0;
   while ((n & 0xff) == 0xff) {
@@ -460,6 +460,7 @@ typedef struct {
   /* dimension-dependent constants */
   double weight1, weight3, weight5;
   double weightE1, weightE3;
+  double df_scale;
 } rule75genzmalik;
 
 #define real(x) ((double)(x))
@@ -510,7 +511,7 @@ static int rule75genzmalik_evalError(rule *r_, unsigned fdim, integrand_v f, voi
 
     /* Evaluate points in the center, in (lambda2,0,...,0) and
        (lambda3=lambda4, 0,...,0).  */
-    evalR0_0fs4d(pts + npts*dim, dim, r->p, center, 
+    evalR0_0fs4d(pts + npts*dim, dim, r->p, center,
 		 r->widthLambda2, r->widthLambda);
     npts += num0_0(dim) + 2 * numR0_0fs(dim);
 
@@ -532,14 +533,14 @@ static int rule75genzmalik_evalError(rule *r_, unsigned fdim, integrand_v f, voi
   //printf( "fdim = 1, npts = %lu\n", npts );
 
   /* we are done with the points, and so we can re-use the pts
-     array to store the maximum difference diff[i] in each dimension 
+     array to store the maximum difference diff[i] in each dimension
      for each hypercube */
   diff = pts;
   for (i = 0; i < dim * nR; ++i) diff[i] = 0;
 
   for (j = 0; j < fdim; ++j) {
     const double *v = vals + j;
-#         define VALS(i) v[fdim*(i)]	       
+#         define VALS(i) v[fdim*(i)]
     for (iR = 0; iR < nR; ++iR) {
       double result, res5th;
       double val0, sum2=0, sum3=0, sum4=0, sum5=0;
@@ -561,7 +562,7 @@ static int rule75genzmalik_evalError(rule *r_, unsigned fdim, integrand_v f, voi
 	sum2 += v0 + v1;
 	sum3 += v2 + v3;
 
-	diff[iR * dim + k] += 
+	diff[iR * dim + k] +=
 	  fabs(v0 + v1 - 2*val0 - ratio * (v2 + v3 - 2*val0));
       }
       k0 += 4*k;
@@ -585,9 +586,10 @@ static int rule75genzmalik_evalError(rule *r_, unsigned fdim, integrand_v f, voi
 #         undef VALS
   }
 
+
   /* figure out dimension to split: */
   for (iR = 0; iR < nR; ++iR) {
-    double maxdiff = 0;
+    double maxdiff = 0, df = 0;
     unsigned dimDiffMax = 0;
 
     for (i = 0; i < dim; ++i)
@@ -645,7 +647,7 @@ static int rule75genzmalik_evalError_mod_first( rule *r_, unsigned fdimf, integr
 
     /* Evaluate points in the center, in (lambda2,0,...,0) and
        (lambda3=lambda4, 0,...,0).  */
-    evalR0_0fs4d(pts + npts*dim, dim, r->p, center, 
+    evalR0_0fs4d(pts + npts*dim, dim, r->p, center,
 		 r->widthLambda2, r->widthLambda);
     npts += num0_0(dim) + 2 * numR0_0fs(dim);
 
@@ -668,7 +670,7 @@ static int rule75genzmalik_evalError_mod_first( rule *r_, unsigned fdimf, integr
     }
   for (j = 0; j < fdim; ++j) {
     const double *v = vals + j;
-#	     define VALS(i) v[fdim*(i)]	       
+#	     define VALS(i) v[fdim*(i)]
     for (iR = 0; iR < nR; ++iR) {
       double result;//, res5th;
       double val0, sum2=0, sum3=0, sum4=0, sum5=0;
@@ -721,12 +723,12 @@ static int rule75genzmalik_evalError_mod_first( rule *r_, unsigned fdimf, integr
       //err[j] += regions.items[i].ee[j].err;
     }
   }
-//  printf("j = %u:", (params->jx2)>>1);
-//  for (j = 0; j < fdim; j++){
-//    val[j] *= 0.03125 * M_1_PI * M_1_PI;
-//    printf( "\t%1.16g", val[j]);//, err[0] );
-//  }
-//  printf("\n");
+  //  printf("j = %u:", (params->jx2)>>1);
+  //  for (j = 0; j < fdim; j++){
+  //    val[j] *= 0.03125 * M_1_PI * M_1_PI;
+  //    printf( "\t%1.16g", val[j]);//, err[0] );
+  //  }
+  //  printf("\n");
   FILE* nFile;
   char nFile_name[95];
   params->archivo_dest(nFile_name,95);
@@ -735,8 +737,8 @@ static int rule75genzmalik_evalError_mod_first( rule *r_, unsigned fdimf, integr
   for (unsigned j=0; j<fdimf; j++)
     fprintf(nFile, " %1.15g ", val[j]);
   fprintf( nFile, "\n" );
-//  for (unsigned j=0; j<fdimf; j++)
-//    fprintf( nFile, "\n%s", params->etiquetas[j] );
+  //  for (unsigned j=0; j<fdimf; j++)
+  //    fprintf( nFile, "\n%s", params->etiquetas[j] );
   fclose( nFile );
   return SUCCESS;
 }
@@ -784,7 +786,7 @@ static int rule75genzmalik_evalError_mod( rule *r_, unsigned fdimt, integrand_v 
 
     for (j = 0; j < fdimt; ++j) {
       const double *v = vals + j;
-#define VALS(i) v[fdimt*(i)]	       
+#define VALS(i) v[fdimt*(i)]
       for (iR = 0; iR < nR; ++iR) {
 	double result; //, res5th;
 	double val0, sum2=0, sum3=0, sum4=0, sum5=0;
@@ -813,7 +815,7 @@ static int rule75genzmalik_evalError_mod( rule *r_, unsigned fdimt, integrand_v 
 	result = R[iR].h.vol * (r->weight1 * val0 + weight2 * sum2 + r->weight3 * sum3 + weight4 * sum4 + r->weight5 * sum5);
 	R[iR].ee[j].val = result;
 	v += r_->num_points * fdimt;
-      }	
+      }
 #	     	undef VALS
     }
     /* Resummation */
@@ -824,9 +826,9 @@ static int rule75genzmalik_evalError_mod( rule *r_, unsigned fdimt, integrand_v 
 	val[j] += R[i].ee[j].val;
       }
     }
-//    for (unsigned kl = 0; kl < fdimt; kl++){
-//      printf("%1.16f\n", val[kl]);
-//    }
+    //    for (unsigned kl = 0; kl < fdimt; kl++){
+    //      printf("%1.16f\n", val[kl]);
+    //    }
     for ( unsigned m = 0; m < num_samples; m++ ){
       //printf( "\n%5.4f", dt * ( m + t_i * Nt ) );
       fprintf( nFile, "\n%5.6f", dt * ( m + t_i * Nt ) );
@@ -883,6 +885,8 @@ static rule *make_rule75genzmalik(unsigned dim, unsigned fdim)
 		 / real(729));
   r->weightE3 = real(265 - 100 * to_int(dim)) / real(1458);
 
+  r->df_scale = pow(10, dim); /* 10^dim */
+
   r->p = (double *) malloc(sizeof(double) * dim * 3);
   if (!r->p) { destroy_rule((rule *) r); return NULL; }
   r->widthLambda = r->p + dim;
@@ -904,32 +908,32 @@ static int rule15gauss_evalError(rule *r,
      L. W. Fullerton, Bell Labs, Nov. 1981. */
   const unsigned n = 8;
   const double xgk[8] = {  /* abscissae of the 15-point kronrod rule */
-			 0.991455371120812639206854697526329,
-			 0.949107912342758524526189684047851,
-			 0.864864423359769072789712788640926,
-			 0.741531185599394439863864773280788,
-			 0.586087235467691130294144838258730,
-			 0.405845151377397166906606412076961,
-			 0.207784955007898467600689403773245,
-			 0.000000000000000000000000000000000
-			 /* xgk[1], xgk[3], ... abscissae of the 7-point gauss rule. 
-			    xgk[0], xgk[2], ... to optimally extend the 7-point gauss rule */
+    0.991455371120812639206854697526329,
+    0.949107912342758524526189684047851,
+    0.864864423359769072789712788640926,
+    0.741531185599394439863864773280788,
+    0.586087235467691130294144838258730,
+    0.405845151377397166906606412076961,
+    0.207784955007898467600689403773245,
+    0.000000000000000000000000000000000
+    /* xgk[1], xgk[3], ... abscissae of the 7-point gauss rule.
+       xgk[0], xgk[2], ... to optimally extend the 7-point gauss rule */
   };
   static const double wg[4] = {  /* weights of the 7-point gauss rule */
-			       0.129484966168869693270611432679082,
-			       0.279705391489276667901467771423780,
-			       0.381830050505118944950369775488975,
-			       0.417959183673469387755102040816327
+    0.129484966168869693270611432679082,
+    0.279705391489276667901467771423780,
+    0.381830050505118944950369775488975,
+    0.417959183673469387755102040816327
   };
   static const double wgk[8] = { /* weights of the 15-point kronrod rule */
-				0.022935322010529224963732008058970,
-				0.063092092629978553290700663189204,
-				0.104790010322250183839876322541518,
-				0.140653259715525918745189590510238,
-				0.169004726639267902826583426598550,
-				0.190350578064785409913256402421014,
-				0.204432940075298892414161999234649,
-				0.209482141084727828012999174891714
+    0.022935322010529224963732008058970,
+    0.063092092629978553290700663189204,
+    0.104790010322250183839876322541518,
+    0.140653259715525918745189590510238,
+    0.169004726639267902826583426598550,
+    0.190350578064785409913256402421014,
+    0.204432940075298892414161999234649,
+    0.209482141084727828012999174891714
   };
   unsigned j, k, iR;
   size_t npts = 0;
@@ -979,15 +983,15 @@ static int rule15gauss_evalError(rule *r,
 	double v = vk[fdim*npts] + vk[fdim*npts+fdim];
 	result_gauss += wg[j] * v;
 	result_kronrod += wgk[j2] * v;
-	result_abs += wgk[j2] * (fabs(vk[fdim*npts]) 
+	result_abs += wgk[j2] * (fabs(vk[fdim*npts])
 				 + fabs(vk[fdim*npts+fdim]));
 	npts += 2;
       }
       for (j = 0; j < n/2; ++j) {
 	int j2 = 2*j;
-	result_kronrod += wgk[j2] * (vk[fdim*npts] 
+	result_kronrod += wgk[j2] * (vk[fdim*npts]
 				     + vk[fdim*npts+fdim]);
-	result_abs += wgk[j2] * (fabs(vk[fdim*npts]) 
+	result_abs += wgk[j2] * (fabs(vk[fdim*npts])
 				 + fabs(vk[fdim*npts+fdim]));
 	npts += 2;
       }
@@ -995,7 +999,7 @@ static int rule15gauss_evalError(rule *r,
       /* integration result */
       R[iR].ee[k].val = result_kronrod * halfwidth;
 
-      /* error estimate 
+      /* error estimate
 	 (from GSL, probably dates back to QUADPACK
 	 ... not completely clear to me why we don't just use
 	 fabs(result_kronrod - result_gauss) * halfwidth */
@@ -1180,8 +1184,8 @@ static int converged(unsigned fdim, const esterr *ee,
 /* adaptive integration, analogous to adaptintegrator.cpp in HIntLib */
 
   static int rulecubature(rule *r, unsigned fdim,
-			  integrand_v f, integrand_v f0, integrand_v ft, void *fdata, 
-			  const hypercube *h, 
+			  integrand_v f, integrand_v f0, integrand_v ft, void *fdata,
+			  const hypercube *h,
 			  size_t maxEval,
 			  double reqAbsError, double reqRelError,
 			  error_norm norm,
@@ -1225,14 +1229,14 @@ static int converged(unsigned fdim, const esterr *ee,
     if (parallel) { /* maximize potential parallelism */
       /* adapted from I. Gladwell, "Vectorization of one
 	 dimensional quadrature codes," pp. 230--238 in
-	 ggg_Numerical Integration. Recent Developments,
+	 _Numerical Integration. Recent Developments,
 	 Software and Applications_, G. Fairweather and
 	 P. M. Keast, eds., NATO ASI Series C203, Dordrecht
 	 (1987), as described in J. M. Bull and
 	 T. L. Freeman, "Parallel Globally Adaptive
 	 Algorithms for Multi-dimensional Integration,"
 	 http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.42.6638
-	 (1994). 
+	 (1994).
 
 	 Basically, this evaluates in one shot all regions
 	 that *must* be evaluated in order to reduce the
@@ -1283,9 +1287,9 @@ static int converged(unsigned fdim, const esterr *ee,
   //printf( "numEval = %lu\n", numEval );
 
   /* re-sum integral and errors */
-  for (j = 0; j < fdim; ++j) val[j] = err[j] = 0;  
+  for (j = 0; j < fdim; ++j) val[j] = err[j] = 0;
   for (i = 0; i < regions.n; ++i) {
-    for (j = 0; j < fdim; ++j) { 
+    for (j = 0; j < fdim; ++j) {
       val[j] += regions.items[i].ee[j].val;
       err[j] += regions.items[i].ee[j].err;
     }
@@ -1311,7 +1315,8 @@ static int converged(unsigned fdim, const esterr *ee,
   for (i = 0; i < regions.n; ++i) {
     destroy_region(&regions.items[i]);
   }
-  //printf("regions.nalloc = %d\n", regions.nalloc);
+
+  /* printf("regions.nalloc = %d\n", regions.nalloc); */
   free(ee);
   heap_free(&regions);
   free(R);
@@ -1346,9 +1351,9 @@ static int converged(unsigned fdim, const esterr *ee,
   return FAILURE;
 }
 
-static int cubature(unsigned fdim, integrand_v f, integrand_v f0, integrand_v ft, void *fdata, 
-		    unsigned dim, const double *xmin, const double *xmax, 
-		    size_t maxEval, double reqAbsError, double reqRelError, 
+static int cubature(unsigned fdim, integrand_v f, integrand_v f0, integrand_v ft, void *fdata,
+		    unsigned dim, const double *xmin, const double *xmax,
+		    size_t maxEval, double reqAbsError, double reqRelError,
 		    error_norm norm,
 		    double *val, double *err, int parallel)
 {
@@ -1365,10 +1370,10 @@ static int cubature(unsigned fdim, integrand_v f, integrand_v f0, integrand_v ft
   }
   r = dim == 1 ? make_rule15gauss(dim, fdim)
     : make_rule75genzmalik(dim, fdim);
-  if (!r) { 
+  if (!r) {
     for (i = 0; i < fdim; ++i) {
       val[i] = 0;
-      err[i] = HUGE_VAL; 
+      err[i] = HUGE_VAL;
     }
     return FAILURE;
   }
@@ -1382,32 +1387,32 @@ static int cubature(unsigned fdim, integrand_v f, integrand_v f0, integrand_v ft
   return status;
 }
 
-int hcubature_v(unsigned fdim, integrand_v f, integrand_v f0, integrand_v ft, void *fdata, 
+int hcubature_v(unsigned fdim, integrand_v f, integrand_v f0, integrand_v ft, void *fdata,
 		unsigned dim, const double *xmin, const double *xmax, size_t minEval,
-		size_t maxEval, double reqAbsError, double reqRelError, 
+		size_t maxEval, double reqAbsError, double reqRelError,
 		error_norm norm,
 		double *val, double *err)
 {
-  return cubature(fdim, f, f0, ft, fdata, dim, xmin, xmax, 
+  return cubature(fdim, f, f0, ft, fdata, dim, xmin, xmax,
 		  maxEval, reqAbsError, reqRelError, norm, val, err, 1);
 }
 
 //#include "vwrapper.h"
 
-//int hcubature(unsigned fdim, integrand f, void *fdata, 
-//		unsigned dim, const double *xmin, const double *xmax, 
-//		size_t maxEval, double reqAbsError, double reqRelError, 
+//int hcubature(unsigned fdim, integrand f, void *fdata,
+//		unsigned dim, const double *xmin, const double *xmax,
+//		size_t maxEval, double reqAbsError, double reqRelError,
 //		error_norm norm,
 //		double *val, double *err)
 //{
 //	int ret;
 //	fv_data d;
 
-//	if (fdim == 0) return SUCCESS; /* nothing to do */     
+//	if (fdim == 0) return SUCCESS; /* nothing to do */
 
 //	d.f = f; d.fdata = fdata;
-//	(unsigned fdim, unsigned fdimt, integrand_v f, integrand_v func_first, integrand_v funct, void *fdata, 
-//	 ret = cubature(fdim, fdimt, fv, &d, dim, xmin, xmax, 
+//	(unsigned fdim, unsigned fdimt, integrand_v f, integrand_v func_first, integrand_v funct, void *fdata,
+//	 ret = cubature(fdim, fdimt, fv, &d, dim, xmin, xmax,
 //			maxEval, reqAbsError, reqRelError, norm, val, err, 0);
 //	return ret;
 //}
